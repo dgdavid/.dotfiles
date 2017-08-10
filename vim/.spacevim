@@ -1,0 +1,37 @@
+" Let vim and neovim share the same plugin directory
+let g:spacevim_plug_home = '~/.vim/plugged'
+
+function! Layers()
+
+    " Shipped layers in
+    Layer 'fzf'
+    Layer 'unite'
+    Layer 'better-defaults'
+
+    Layer 'file-manager'
+
+    Layer 'programming'
+    Layer 'editing'
+
+    Layer 'git'
+
+    Layer 'javascript'
+    Layer 'vue'
+
+    Layer 'syntax-checking'
+
+endfunction
+
+" Private plugins
+function! UserInit()
+
+    Plug 'junegunn/seoul256.vim'
+
+endfunction
+
+" Override the default settings
+function! UserConfig()
+
+    autocmd FileType python setlocal completeopt-=preview
+
+endfunction
