@@ -3,6 +3,14 @@
 My custom collection of dotfiles. Second attempt :sweat_smile:, now managed via
 [GNU Stow](https://www.gnu.org/software/stow/).
 
+## Installation
+
+`git clone git@github.com:dgdavid/.dotfiles.git ~/.dotfiles`
+
+`cd ~/.dotfiles`
+
+`stow <desired directory>`
+
 ## vim
 
 So far I was using the awesome Steve Francia's vim distribution,
