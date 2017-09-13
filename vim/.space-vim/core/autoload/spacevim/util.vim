@@ -1,3 +1,6 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"    Basic tools
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 function! spacevim#util#err(msg)
   echohl ErrorMsg
   echom '[space-vim] '.a:msg
@@ -10,6 +13,18 @@ function! spacevim#util#warn(cmd, msg)
   echohl None
 endfunction
 
+" argument plugin is the vim plugin's name
+function! spacevim#util#IsDir(plugin) abort
+  return isdirectory(expand(g:my_plug_home.a:plugin)) ? 1 : 0
+endfunction
+
+function! spacevim#util#LayerLoaded(layer) abort
+    return index(g:layers_loaded, a:layer) > -1 ? 1 : 0
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"    Utilities
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 function! spacevim#util#ToggleCursorColumn()
   if &cursorcolumn
     setlocal nocursorcolumn
@@ -27,23 +42,22 @@ function! spacevim#util#ToggleColorColumn()
 endfunction
 
 function! spacevim#util#CompileAndRun()
-  exec 'w'
-  if &filetype == 'c'
-    exec "AsyncRun! gcc % -o %<; time ./%<"
-  elseif &filetype == 'cpp'
-    exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
-  elseif &filetype == 'go'
-    exec "! go run %"
-  elseif &filetype == 'java'
-    exec "AsyncRun! javac %; time java %<"
-  elseif &filetype == 'python'
-    exec "AsyncRun! time python %"
-  elseif &filetype == 'ruby'
-    exec "AsyncRun! time ruby %"
-  elseif &filetype == 'rust'
-    exec "AsyncRun! rustc % -o %<; time ./%<"
-  elseif &filetype == 'sh'
-    exec "AsyncRun! time bash %"
+  let l:cmd = {
+        \ 'c': "gcc % -o %<; time ./%<",
+        \ 'sh': "time bash %",
+        \ 'go': "go run %",
+        \ 'cpp': "g++ -std=c++11 % -o %<; time ./%<",
+        \ 'ruby': "time ruby %",
+        \ 'java': "javac %; time java %<",
+        \ 'rust': "rustc % -o %<; time ./%<",
+        \ 'python': "time python %",
+        \}
+  let l:ft = &filetype
+  if has_key(l:cmd, l:ft)
+    exec 'w'
+    exec "AsyncRun! ".l:cmd[l:ft]
+  else
+    call spacevim#util#err("spacevim#util#CompileAndRun not supported in current filetype!")
   endif
 endfunction
 
