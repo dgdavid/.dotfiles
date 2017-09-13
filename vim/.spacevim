@@ -12,6 +12,7 @@ function! Layers()
 
     Layer 'programming'
     Layer 'editing'
+    Layer 'auto-completion'
 
     Layer 'git'
 
@@ -26,12 +27,16 @@ endfunction
 function! UserInit()
 
     Plug 'junegunn/seoul256.vim'
-
+    Plug 'shime/vim-livedown'
 endfunction
 
 " Override the default settings
 function! UserConfig()
 
+    EditorConfigReload
     autocmd FileType python setlocal completeopt-=preview
 
+    " https://github.com/liuchengxu/space-vim/issues/184#issuecomment-314318529
+    set <F20>=
+    set <F21>=
 endfunction
