@@ -18,3 +18,7 @@ So far I was using the awesome Steve Francia's vim distribution,
 sophisticated configuration using [Janus](https://github.com/carlhuda/janus).
 But now I am giving a try to
 [space-vim](https://github.com/liuchengxu/space-vim) :grin: :grin:
+
+## tmux
+
+Use ["Oh My Tmux!"](https://github.com/gpakosz/.tmux) configuration.
