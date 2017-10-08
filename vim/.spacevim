@@ -28,6 +28,7 @@ function! UserInit()
 
     Plug 'junegunn/seoul256.vim'
     Plug 'shime/vim-livedown'
+
 endfunction
 
 " Override the default settings
@@ -39,4 +40,12 @@ function! UserConfig()
     " https://github.com/liuchengxu/space-vim/issues/184#issuecomment-314318529
     set <F20>=
     set <F21>=
+
+    " To spell check all git commit messages
+    au BufNewFile,BufRead COMMIT_EDITMSG set spell
+
+    " Underline misspelled words
+    hi clear SpellBad
+    hi SpellBad ctermfg=9 ctermbg=none cterm=bold,underline
+
 endfunction
