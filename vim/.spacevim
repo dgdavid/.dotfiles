@@ -53,4 +53,7 @@ function! UserConfig()
     hi clear SpellBad
     hi SpellBad ctermfg=1 ctermbg=7 cterm=bold
 
+    " Set text width for commit messages
+    au FileType gitcommit set tw=72
+
 endfunction
