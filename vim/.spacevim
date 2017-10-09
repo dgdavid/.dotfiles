@@ -47,9 +47,10 @@ function! UserConfig()
 
     " To spell check all git commit messages
     au BufNewFile,BufRead COMMIT_EDITMSG set spell
+    au BufNewFile,BufRead *.md set spell
 
     " Underline misspelled words
     hi clear SpellBad
-    hi SpellBad ctermfg=9 ctermbg=none cterm=bold,underline
+    hi SpellBad ctermfg=1 ctermbg=7 cterm=bold
 
 endfunction
