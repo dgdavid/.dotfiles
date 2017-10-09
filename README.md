@@ -57,7 +57,11 @@ Apart from those installed by `space-vim` distribution, below plugins were added
 
 #### Custom configuration
 
-See [`.spacevim`](vim/.spacevim) for more info.
+:exclamation: Do not forget take a look to [`.spacevim`](vim/.spacevim) for more info.
+
+  * **Persistent undo** create the `.vimundo` in your $HOME directory.
+
+    `$ mkdir ~/.vimundo`
 
 ### Zsh
 

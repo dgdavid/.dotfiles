@@ -41,6 +41,10 @@ function! UserConfig()
     set <F20>=
     set <F21>=
 
+    " Persistent undo
+    set undofile
+    set undodir=~/.vimundo
+
     " To spell check all git commit messages
     au BufNewFile,BufRead COMMIT_EDITMSG set spell
 
