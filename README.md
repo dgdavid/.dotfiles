@@ -18,7 +18,7 @@ Clone repo and use Stow to add or remove desired configurations
 This repo is using `git subtree`s to hold some external used repos. To update
 or keep sync them, you can list prefixes
 
-`$ git log | grep git-subtree-dir | tr -d ' ' | cut -d ":" -f2 | sort | uniq` (vía [StackOverflow](https://stackoverflow.com/a/18339297))
+`$ git log | grep git-subtree-dir | tr -d ' ' | cut -d ":" -f2 | sort | uniq` (via [StackOverflow](https://stackoverflow.com/a/18339297))
 
 and then update those what do you want
 
@@ -57,7 +57,7 @@ Apart from those installed by `space-vim` distribution, below plugins were added
 
 #### Custom configuration
 
-:exclamation: Do not forget take a look to [`.spacevim`](vim/.spacevim) for more info.
+:exclamation: *Do not forget take a look to [`.spacevim`](vim/.spacevim) for more info*.
 
   * **Persistent undo** create the `.vimundo` in your $HOME directory.
 

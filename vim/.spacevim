@@ -5,19 +5,24 @@ function! Layers()
 
     " Shipped layers in
     Layer 'fzf'
+    Layer 'ctrlp'
     Layer 'unite'
     Layer 'better-defaults'
+    Layer 'airline'
+    Layer 'spacevim'
 
     Layer 'file-manager'
 
     Layer 'programming'
     Layer 'editing'
     Layer 'auto-completion'
+    Layer 'text-align'
 
     Layer 'git'
 
     Layer 'javascript'
-    Layer 'vue'
+    Layer 'ruby'
+    Layer 'html'
 
     Layer 'syntax-checking'
 
