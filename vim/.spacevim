@@ -33,11 +33,18 @@ function! UserInit()
 
     Plug 'junegunn/seoul256.vim'
     Plug 'shime/vim-livedown'
+    Plug 'rakr/vim-one'
 
 endfunction
 
 " Override the default settings
 function! UserConfig()
+
+    let g:one_allow_italics = 1 " Italics for comments
+    colorscheme one
+    set background=dark
+
+    hi Comment ctermfg=249
 
     EditorConfigReload
     autocmd FileType python setlocal completeopt-=preview
