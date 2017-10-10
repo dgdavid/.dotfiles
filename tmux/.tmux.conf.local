@@ -267,3 +267,6 @@ tmux_conf_copy_to_os_clipboard=false
 
 # move status line to top
 #set -g status-position top
+
+# Allow italics (see https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/)
+set -g default-terminal "xterm-256color-italic"

@@ -30,6 +30,21 @@ and then update those what do you want
 
 [Oh My Tmux!](https://github.com/gpakosz/.tmux) - pretty + versatile tmux configuration that just works.
 
+#### Enabling italics
+
+##### Inside gnome-terminal
+
+Following steps given in [this
+article](http://www.nerdyweekly.com/posts/enable-italic-text-vim-tmux-gnome-terminal/),
+
+
+* :exclamation: compile the custom  (and included here) terminfo `xterm-256color-italic.terminfo`
+
+  `$ tic xterm-256color-italic.terminfo`
+
+* ensure that `set -g default-terminal "xterm-256color-italic"` it is being
+  used in the tmux.conf (see [tmux/.tmux.conf.local](.tmux.conf.local)).
+
 ### vim
 
 So far I was using the awesome Steve Francia's vim distribution,
