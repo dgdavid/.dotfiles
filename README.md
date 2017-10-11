@@ -80,6 +80,8 @@ sophisticated configuration using [Janus](https://github.com/carlhuda/janus). Bu
 
 ---
 
+First time, it could be necessary to execute `:PlugInstall`.
+
 #### Additional plugins
 
 Apart from those installed by `space-vim` distribution, below plugins were added
