@@ -94,6 +94,8 @@ Apart from those installed by `space-vim` distribution, below plugins were added
 
   `$ npm install -g livedown`
 
+* [vim-rails](https://github.com/tpope/vim-rails) - Ruby on Rails power tools
+
 #### Custom configuration
 
 :exclamation: *Do not forget take a look to [`.spacevim`](vim/.spacevim) for more info*.

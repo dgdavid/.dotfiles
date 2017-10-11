@@ -33,7 +33,10 @@ function! UserInit()
 
     Plug 'junegunn/seoul256.vim'
     Plug 'shime/vim-livedown'
+
     Plug 'rakr/vim-one'
+
+    Plug 'tpope/vim-rails'
 
 endfunction
 
