@@ -28,11 +28,12 @@
 * [Features](#features)
 * [For whom?](#for-whom)
 * [Install](#install)
+  * [Prerequisites](#prerequisites)
   * [Linux and macOS](#linux-and-macos)
-    * [`Makefile`](#makefile)
-    * [`install.sh`](#installsh)
+    * [one-line installer](#one-line-installer)
+    * [Makefile](#makefile)
   * [Windows](#windows)
-  * [Manual (Linux and macOS)](#manual-linux-and-macos)
+  * [Manual](#manual)
 * [Customize](#customize)
   * [Presetting](#presetting)
   * [`Layers()`](#layers)
@@ -43,7 +44,7 @@
   * [Commands](#commands)
   * [Tips](#tips)
     * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
-    * [Font](#font)
+    * [Terminal font](#terminal-font)
 * [Update](#update)
 * [Contributions](#contributions)
 * [Acknowledgements](#acknowledgements)
@@ -89,102 +90,67 @@ If you have been a vimmer for quite a while, just pick out the part you are inte
 
 ## Install
 
+### Prerequisites
+
 Make sure you have installed:
 
 - **git**
 - **Vim** or **NeoVim**
 
-The most recent Vim(NeoVim) version is recommended.
+The most recent Vim(NeoVim) version is recommended, for space-vim has been specifically optimized for Vim8 and NeoVim with respect to the startup time.
 
 :exclamation: ~~When layers enabled at the first time, you need to run `:PlugInstall` to install relevant plugins~~.
 
 ### Linux and macOS
 
-#### `Makefile`
+#### one-line installer
 
 ```bash
-git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
-cd ~/.space-vim
-make vim     # install space-vim for Vim
-make neovim  # install space-vim for NeoVim
+$ bash <(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)
 ```
+#### Makefile
 
-#### `install.sh`
-
-- curl
-
-    ```bash
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
-    ```
-
-- wget
-
-    ```bash
-    sh -c "$(wget -qO- https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
-    ```
-
-    :warning: For neovim, after the quick installer is done, you still need to create a symlink:
-
-    ```bash
-    ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
-    ```
+```bash
+$ git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
+$ cd ~/.space-vim
+$ make vim     # install space-vim for Vim
+$ make neovim  # install space-vim for NeoVim
+```
 
 ### Windows
 
-1. [Download git](https://git-scm.com/download/win)
+The easist way is to download [`install.cmd`](https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.cmd) and **run it as administrator**, or [install space-vim manually](https://github.com/liuchengxu/space-vim/wiki/install#windows).
 
-2. [Download Vim](https://github.com/vim/vim-win32-installer/releases)
+![windows](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/win-gvim.png)
 
-3. Download [vim-plug](https://github.com/junegunn/vim-plug#installation):
+### Manual
 
-    **windows (PowerShell)**
-
-    ```powershell
-    md ~\.vim\autoload
-    $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    (New-Object Net.WebClient).DownloadFile(
-      $uri,
-      $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(
-        "~\.vim\autoload\plug.vim"
-      )
-    )
-    ```
-
-4. Enter your home directory, Open *Git Bash* by right-clicking and choosing the option `Git Bash Here`.
-
-    Run the following commands to download space-vim and make a symlink.
-
-    ```bash
-    git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
-    ln -s ~/.space-vim/init.vim ~/.vimrc
-    cp ~/.space-vim/init.spacevim ~/.spacevim
-    ```
-
-5. Open vim, run `:PlugInstall`.
-
-### Manual (Linux and macOS)
+Given git and Vim/NeoVim have been installed already:
 
 1. Clone [space-vim](https://github.com/liuchengxu/space-vim)
 
     ```bash
-    git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
+    $ git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
     ```
 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug#installation), refer to vim-plug installation section for more information.
 
-3. Create a symlink.
+3. Create the symlinks.
+
+    **Linux and macOS**
 
     ```bash
-    # for Vim
-    ln -s ~/.space-vim/init.vim ~/.vimrc
+    # For Vim
+    $ ln -s ~/.space-vim/init.vim ~/.vimrc
 
-    # for NeoVim
-    ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
+    # For NeoVim
+    $ ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
 
     # Both for Vim and NeoVim
-    cp ~/.space-vim/init.spacevim ~/.spacevim
+    $ cp ~/.space-vim/init.spacevim ~/.spacevim
     ```
-5. Open vim, then space-vim will automatically install the missing plugins in enabled layers. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
+
+5. Open vim, then space-vim will automatically install the missing plugins. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
 
 ## Customize
 
@@ -204,7 +170,7 @@ let g:space_vim_dark_background = 234
 
 ### `Layers()`
 
-Please refer to [LAYERS](layers/LAYERS.md) to take a look at the whole shipped layers.
+Please refer to [LAYERS.md](layers/LAYERS.md) to take a look at the whole shipped layers.
 
 ```vim
 " Enable the existing layers in space-vim
@@ -225,9 +191,11 @@ endfunction
 function! UserInit()
 
   " The default leader key is space key.
+  " Uncomment the line below and modify "<\Space>" if you prefer another
   " let g:spacevim_leader = "<\Space>"
 
   " The default local leader key is comma.
+  " Uncomment the line below and modify ',' if you prefer another
   " let g:spacevim_localleader = ','
 
   " Install personal plugins
@@ -301,28 +269,28 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 For more details about true colour, please see the gist [TrueColour.md](https://gist.github.com/XVilka/8346728).
 
-#### Font
+#### Terminal Font
 
-Install the [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) or [Powerline](https://github.com/powerline/fonts) font, especially for [airline](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bthemes/airline/README.md) Layer.
+<img src="https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/iterm2_powerline_setting.png?raw=true" align="right" width="550px" alt="iterm2-font-setting" />
 
-If you are running in terminal you'll need to change font settings of your terminal as well.
+First, install the [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) or [Powerline](https://github.com/powerline/fonts) font, which is important for [airline](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bthemes/airline/README.md) layer.
 
-![iterm2_font_setting](https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/iterm2_powerline_setting.png?raw=true)
+Second, since console Vim uses whatever font the console/terminal is using, you'll have to change the font setting of your terminal.
 
 ## Update
 
 Run `make update`:
 
 ```bash
-cd path/to/space-vim
-make update
+$ cd path/to/space-vim
+$ make update
 ```
 
 Alternatively, you can manually perform the following steps. If anything has changed with the structure of the configuration, you will have to create the appropriate symlinks.
 
 ```bash
-cd path/to/space-vim
-git pull origin master
+$ cd path/to/space-vim
+$ git pull origin master
 ```
 ## Contributions
 
