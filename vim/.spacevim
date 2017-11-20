@@ -37,6 +37,7 @@ function! UserInit()
 
     Plug 'tpope/vim-rails'
     Plug 'chrisbra/csv.vim'
+    Plug 'jelera/vim-javascript-syntax'
 
 endfunction
 
