@@ -13,6 +13,10 @@ function! spacevim#util#warn(cmd, msg)
   echohl None
 endfunction
 
+function! spacevim#util#info(msg)
+  echom '[space-vim] '.a:msg
+endfunction
+
 " argument plugin is the vim plugin's name
 function! spacevim#util#IsDir(plugin) abort
   return isdirectory(expand(g:my_plug_home.a:plugin)) ? 1 : 0
@@ -92,4 +96,56 @@ function! spacevim#util#GotoJump()
       execute "normal " . l:j . "\<C-O>"
     endif
   endif
+endfunction
+
+" [DEPRECATED] ALE statusline integration
+function! spacevim#util#ALEGetError()
+  let l:res = ale#statusline#Status()
+  if l:res ==# 'OK'
+    return ''
+  else
+    let l:e_w = split(l:res)
+    if len(l:e_w) == 2 || match(l:e_w, 'E') > -1
+      return ' •' . matchstr(l:e_w[0], '\d\+') .' '
+    endif
+  endif
+endfunction
+
+function! spacevim#util#ALEGetWarning()
+  let l:res = ale#statusline#Status()
+  if l:res ==# 'OK'
+    return ''
+  else
+    let l:e_w = split(l:res)
+    if len(l:e_w) == 2
+      return ' •' . matchstr(l:e_w[1], '\d\+')
+    elseif match(l:e_w, 'W') > -1
+      return ' •' . matchstr(l:e_w[0], '\d\+')
+    endif
+  endif
+endfunction
+
+" https://www.reddit.com/r/vim/comments/79q6aq/vim_tip_keybinding_for_opening_plugin_homepage/
+" visiting the GitHub page of the plugin defined on the current line
+function! spacevim#util#OpenPluginHomepage() abort
+  let line = getline(".")
+  let $BROWSER = 'open'
+
+  " Matches for instance Plug 'tpope/surround' -> tpope/surround
+  " Non-greedy match in order to not capture trailing comments
+  let plugin_name = '\w\+ \([''"]\)\(.\{-}\)\1'
+  let repository = matchlist(line, plugin_name)[2]
+
+  " Open the corresponding GitHub homepage with $BROWSER
+  " You need to set the BROWSER environment variable in order for this to work
+  " For MacOS, you can set the following for opening it in your default
+  " browser: 'export BROWSER=open'
+  silent exec "!$BROWSER https://github.com/".repository
+endfunction
+
+function! spacevim#util#GetNvimVersion()
+    redir => s
+    silent! version
+    redir END
+    return matchstr(s, 'NVIM v\zs[^\n]*')
 endfunction
