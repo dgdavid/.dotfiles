@@ -80,6 +80,8 @@ function! UserConfig()
     " colo seoul256
     " colo seoul256-light
 
+    hi Comment cterm=italic ctermfg=249
+
     autocmd FileType python setlocal completeopt-=preview
 
     " https://github.com/liuchengxu/space-vim/issues/184#issuecomment-314318529
@@ -90,9 +92,9 @@ function! UserConfig()
     set undofile
     set undodir=~/.vimundo
 
-    " To spell check all git commit messages
-    au BufNewFile,BufRead COMMIT_EDITMSG set spell
-    au BufNewFile,BufRead *.md set spell
+    " To spell check
+    au BufNewFile,BufRead COMMIT_EDITMSG set spell " git commit
+    au BufNewFile,BufRead *.md set spell " markdown
 
     " Underline misspelled words
     hi clear SpellBad
