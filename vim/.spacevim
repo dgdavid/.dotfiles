@@ -37,6 +37,7 @@ function! UserInit()
     Plug 'rakr/vim-one'
 
     Plug 'tpope/vim-rails'
+    Plug 'chrisbra/csv.vim'
 
 endfunction
 
