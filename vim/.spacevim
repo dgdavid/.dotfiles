@@ -9,7 +9,6 @@ function! Layers()
     Layer 'unite'
     Layer 'better-defaults'
     Layer 'airline'
-    Layer 'spacevim'
 
     Layer 'file-manager'
 
