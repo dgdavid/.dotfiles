@@ -128,3 +128,8 @@ Zsh plugins](https://github.com/unixorn/awesome-zsh-plugins#frameworks) and
   simple.
 * [Vimode visual](https://github.com/b4b4r07/zsh-vimode-visual) - Implement the
   vim-like visual mode to vi-mode of Zsh.
+
+### irb
+
+This custom configuration file was added due to a problem in macOS related to
+reverse search and history in both `irb` and `Rails console`.
