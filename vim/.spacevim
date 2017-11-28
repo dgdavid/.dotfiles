@@ -58,27 +58,9 @@ function! UserConfig()
 
     let g:one_allow_italics = 1 " Italics for comments
 
-    " set background=dark
-    set background=light
+    set background=dark
 
-    " colorscheme one
-    " colorscheme abstract
-    " colorscheme gruvbox
-    " syntax on
-    " color dracula
-    " colorscheme PaperColor
-    " colorscheme nord
-    " colorscheme iceberg
-    " colorscheme two-firewatch
-    " colorscheme cake16
-    colorscheme pencil
-    " colorscheme warm-night
-
-    " let g:seoul256_background = 233
-    " let g:seoul256_light_background = 100
-
-    " colo seoul256
-    " colo seoul256-light
+    colorscheme iceberg
 
     hi Comment cterm=italic ctermfg=249
 
