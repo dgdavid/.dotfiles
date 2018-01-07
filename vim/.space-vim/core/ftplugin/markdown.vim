@@ -1,3 +1,8 @@
+if exists('b:did_spacevim_md_ftplugin')
+  finish
+endif
+let b:did_spacevim_md_ftplugin = 1
+
 setlocal wrap
 
 nnoremap <buffer> <LocalLeader>1 m`yypVr=``
@@ -19,11 +24,17 @@ if spacevim#LayerLoaded('text-align')
   nnoremap <buffer> <LocalLeader>ta :Tabularize /<Bar><CR>
 endif
 
-if !has('g:spacevim_markdown_loaded')
-  if g:spacevim_timer
-    call timer_start(1300, 'spacevim#defer#markdown')
-  endif
-  let g:spacevim_markdown_loaded = 1
+let g:tagbar_type_markdown = {
+      \ 'ctagstype' : 'markdown',
+      \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+        \ ]
+      \ }
+
+if g:spacevim_timer
+  call timer_start(1300, 'spacevim#defer#markdown')
 endif
 
 if exists('*emoji#complete')
