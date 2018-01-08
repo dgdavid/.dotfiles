@@ -41,6 +41,9 @@ function! UserConfig()
 
     EditorConfigReload
 
+    set wrap
+    set linebreak
+
     let g:one_allow_italics = 1 " Italics for comments
 
     set background=dark
