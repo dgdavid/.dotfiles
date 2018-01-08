@@ -1,31 +1,15 @@
 " Let vim and neovim share the same plugin directory
 let g:spacevim_plug_home = '~/.vim/plugged'
 
-function! Layers()
-
-    " Shipped layers in
-    Layer 'fzf'
-    Layer 'ctrlp'
-    Layer 'unite'
-    Layer 'better-defaults'
-    Layer 'airline'
-
-    Layer 'file-manager'
-
-    Layer 'programming'
-    Layer 'editing'
-    Layer 'auto-completion'
-    Layer 'text-align'
-
-    Layer 'git'
-
-    Layer 'javascript'
-    Layer 'ruby'
-    Layer 'html'
-
-    Layer 'syntax-checking'
-
-endfunction
+" Shipped layers in
+let g:spacevim_layers = [
+      \ 'fzf', 'ctrlp', 'unite', 'better-defaults', 'airline',
+      \ 'file-manager',
+      \ 'programming', 'editing', 'auto-completion', 'text-align',
+      \ 'git',
+      \ 'javascript', 'ruby', 'html',
+      \ 'syntax-checking'
+      \ ]
 
 " Private plugins
 function! UserInit()
