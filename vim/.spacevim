@@ -34,6 +34,8 @@ function! UserInit()
     Plug 'jelera/vim-javascript-syntax'
     Plug 'thiagoalessio/rainbow_levels.vim', { 'on': 'RainbowLevelsToggle' }
 
+    Plug 'mbbill/undotree'
+
 endfunction
 
 " Override the default settings
