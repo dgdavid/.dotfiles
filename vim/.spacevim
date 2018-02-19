@@ -75,5 +75,10 @@ function! UserConfig()
     " Set text width for commit messages
     au FileType gitcommit set tw=72
 
+    " Rainbow indent
     map <leader>l :RainbowLevelsToggle<cr>
+
+    " Crlp custom configuration
+    let g:ctrlp_by_filename = 0
+    let g:ctrlp_working_path_mode = 'rc'
 endfunction
