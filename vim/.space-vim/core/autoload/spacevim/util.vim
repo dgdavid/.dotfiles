@@ -22,10 +22,6 @@ function! spacevim#util#IsDir(plugin) abort
   return isdirectory(expand(g:my_plug_home.a:plugin)) ? 1 : 0
 endfunction
 
-function! spacevim#util#LayerLoaded(layer) abort
-    return index(g:layers_loaded, a:layer) > -1 ? 1 : 0
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "    Utilities
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,4 +101,27 @@ function! spacevim#util#ToggleHiddleAll()
     let s:hidden_all = 0
     setlocal showmode ruler showcmd laststatus=2 cmdheight=1
   endif
+endfunction
+
+function! spacevim#util#RootDirectory()
+  if exists('*FindRootDirectory')
+    let root_dir = FindRootDirectory()
+  else
+    let git_dir = system('git rev-parse --git-dir')
+    if !v:shell_error
+      let root_dir = substitute(fnamemodify(git_dir, ':p:h'), ' ', '\\ ', 'g')
+    else
+      let root_dir = ''
+    endif
+  endif
+  return root_dir == '' ? getcwd() : root_dir
+endfunction
+
+function! spacevim#util#ExpandSnippetOrCarriageReturn()
+  if exists("*UltiSnips#ExpandSnippet")
+    if get(g:, 'ulti_expand_res', 0) > 0
+      return UltiSnips#ExpandSnippet()
+    endif
+  endif
+  return "\<c-y>\<cr>"
 endfunction

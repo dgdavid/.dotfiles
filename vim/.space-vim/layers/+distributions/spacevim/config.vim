@@ -47,20 +47,20 @@ augroup spacevimBasic
   " http://stackoverflow.com/questions/5933568/disable-blinking-at-the-first-last-line-of-the-file
   autocmd GUIEnter * set t_vb=
 
-  if g:spacevim_gui
+  if g:spacevim.gui
     let g:screen_size_restore_pos = get(g:, 'screen_size_restore_pos', 1)
     let g:screen_size_by_vim_instance = get(g:, 'screen_size_by_vim_instance', 1)
     autocmd VimEnter * if g:screen_size_restore_pos == 1 | call spacevim#vim#gui#ScreenRestore() | endif
     autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call spacevim#vim#gui#ScreenSave() | endif
   endif
 
-  if !spacevim#LayerLoaded('chinese')
+  if !spacevim#load('chinese')
     silent! set $LANG = 'en_US'
     silent! let langmenu=en_US
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
 
-    if g:WINDOWS
+    if g:spacevim.os.windows
       set guifont=Consolas:h13
     endif
   endif
@@ -71,7 +71,7 @@ hi ExtraWhitespace guifg=#FF2626 gui=underline ctermfg=124 cterm=underline
 match ExtraWhitespace /\s\+$/
 
 " Refer to http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
-if g:spacevim_gui
+if g:spacevim.gui
   set guioptions-=e
 endif
 silent! set showtabline=1

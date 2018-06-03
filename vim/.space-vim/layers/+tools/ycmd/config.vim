@@ -45,4 +45,6 @@ scriptencoding utf-8
     autocmd FileType c,cpp
                 \   nnoremap <LocalLeader>gp :YcmCompleter GetParent<CR>
   augroup END
+
+  inoremap <expr> <CR> pumvisible() ? "<C-R>=spacevim#util#ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }
