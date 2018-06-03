@@ -190,6 +190,34 @@ function! s:align_lists(lists)
   return a:lists
 endfunction
 
+command! -bang -nargs=* Ag
+            \ call fzf#vim#ag(<q-args>,
+            \                 <bang>0 ? fzf#vim#with_preview('up:80%')
+            \                         : fzf#vim#with_preview('right:80%:hidden', '?'),
+            \                 <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:70%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" }
+
+function! spacevim#plug#fzf#Session()
+  call fzf#run({
+  \ 'source':  'ls -1 ~/.vim/session',
+  \ 'sink':    'SLoad',
+  \ 'options': '+m --prompt="Sessions> "',
+  \ 'down':    '40%'
+  \})
+endfunction
+
+
 " ------------------------------------------------------------------
 " Configuration Files
 " ------------------------------------------------------------------
@@ -329,14 +357,62 @@ endfunction
 " FZF find file
 " ------------------------------------------------------------------
 function! spacevim#plug#fzf#FindFileInProject()
-  exe ':FZF ' . FindRootDirectory()
+  exe ':FZF '.spacevim#util#RootDirectory()
 endfunction
 
 " ------------------------------------------------------------------
 " Rag utilizes ag in the root directory of project
 " ------------------------------------------------------------------
 command! -nargs=* Rag
-  \ call fzf#vim#ag(<q-args>, extend({'dir':FindRootDirectory(), 'options': '--prompt="'.FindRootDirectory().'> "'}, g:fzf_layout))
+  \ call fzf#vim#ag(<q-args>, extend({
+    \ 'dir': spacevim#util#RootDirectory(),
+    \ 'options': '--prompt="'.spacevim#util#RootDirectory().'> "'},
+    \ g:fzf_layout
+    \))
 function! spacevim#plug#fzf#SearchInProject()
   exe ':Rag'
+endfunction
+
+" ------------------------------------------------------------------
+" Search word under cursor with ag
+" ------------------------------------------------------------------
+function! spacevim#plug#fzf#SearchCword()
+  call fzf#vim#ag(
+        \ expand('<cword>'),{
+        \ 'dir': spacevim#util#RootDirectory(),
+        \ 'options': '--ansi --delimiter : --nth 4..,.. --prompt "?'.expand('<cword>').'> " '.
+        \            '--color hl:68,hl+:110 --multi '.
+        \            '--bind=ctrl-d:page-down,ctrl-u:page-up ',
+        \ })
+endfunction
+
+" ------------------------------------------------------------------
+" Jumps incompleted, sink is wrong
+" ------------------------------------------------------------------
+function! s:format_jump(line)
+  return substitute(a:line, '\S', '\=s:yellow(submatch(0))', '')
+endfunction
+
+function! s:jump_sink(lines)
+  if len(a:lines) < 2
+    return
+  endif
+  let cmd = s:action_for(a:lines[0])
+  if !empty(cmd)
+    execute 'silent' cmd
+  endif
+  echom "a:lines[1]: ".a:lines[1]
+  echom "jumps normal: ".matchstr(a:lines[1], '\d\s')
+  execute 'normal! `'.matchstr(a:lines[1], '\S').'zz'
+endfunction
+
+function! spacevim#plug#fzf#Jumps(...)
+  redir => cout
+  silent jumps
+  redir END
+  let list = split(cout, "\n")
+  return s:fzf('jumps', {
+  \ 'source':  extend(list[0:0], map(list[1:-2], 's:format_jump(v:val)')),
+  \ 'sink*':   s:function('s:jump_sink'),
+  \ 'options': '+m -x --ansi --tiebreak=index --header-lines 1 --tiebreak=begin --prompt "Jumps> "'}, a:000)
 endfunction
