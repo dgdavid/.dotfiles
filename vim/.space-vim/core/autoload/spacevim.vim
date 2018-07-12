@@ -9,7 +9,7 @@ let g:spacevim.timer = exists('*timer_start')
 let g:spacevim.gui = has('gui_running')
 let g:spacevim.tmux = !empty($TMUX)
 
-let g:spacevim.loaded = []
+let g:spacevim.loaded = ['spacevim'] " Enable spacevim layer by default
 let g:spacevim.excluded = []
 let g:spacevim.plugins = []
 
@@ -21,6 +21,11 @@ let s:TYPE = {
 \ 'dict':    type({}),
 \ 'funcref': type(function('call'))
 \ }
+
+function! spacevim#bootstrap() abort
+  call spacevim#begin()
+  call spacevim#end()
+endfunction
 
 function! spacevim#begin() abort
   " Download vim-plug if unavailable
@@ -50,9 +55,7 @@ endfunction
 function! s:check_dot_spacevim()
   if filereadable(expand(s:dot_spacevim))
     call s:Source(s:dot_spacevim)
-    if exists('g:spacevim_layers')
-      let g:spacevim.loaded = g:spacevim.loaded + g:spacevim_layers
-    endif
+    call extend(g:spacevim.loaded, get(g:, 'spacevim_layers', []))
     let g:mapleader = get(g:, 'spacevim_leader', "\<Space>")
     let g:maplocalleader = get(g:, 'spacevim_localleader', ',')
   else
@@ -141,10 +144,9 @@ function! spacevim#end() abort
 endfunction
 
 function! s:register_plugin()
-  if !exists('g:spacevim_plug_home')
-    " https://github.com/junegunn/vim-plug/issues/559
-    let g:spacevim_plug_home = g:spacevim.nvim ? '~/.local/share/nvim/plugged' : '~/.vim/plugged/'
-  endif
+  " https://github.com/junegunn/vim-plug/issues/559
+  let l:plug_home = g:spacevim.nvim ? '~/.local/share/nvim/plugged' : '~/.vim/plugged/'
+  let g:spacevim_plug_home = get(g:, 'spacevim_plug_home', l:plug_home)
 
   call plug#begin(g:spacevim_plug_home)
 
@@ -231,15 +233,14 @@ function! s:post_user_config()
     endif
   endif
   " }
-  " https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup
-  augroup checkPlug
-    autocmd!
-    autocmd VimEnter *
-      \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-      \|   echom '[space-vim] Some layers need to install the missing plugins first!'
-      \|   PlugInstall --sync | q
-      \| endif
-  augroup END
+  if g:spacevim.timer
+      call timer_start(1500, 'spacevim#vim#plug#check')
+  else
+    augroup checkPlug
+      autocmd!
+      autocmd VimEnter * call spacevim#vim#plug#check()
+    augroup END
+  endif
 endfunction
 
 " Util for config.vim and packages.vim
