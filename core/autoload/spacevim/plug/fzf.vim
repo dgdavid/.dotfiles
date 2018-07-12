@@ -1,20 +1,4 @@
-" Only suitable for space-vim-dark theme, other themes are not guaranteed.
-let g:spacevim#plug#fzf#colors = {
-            \ 'fg':      ['fg', 'StatusLineNC'],
-            \ 'bg':      ['bg', 'Normal'],
-            \ 'hl':      ['fg', 'String'],
-            \ 'fg+':     ['fg', 'Number', 'Normal'],
-            \ 'bg+':     ['bg', 'StatusLine', 'Normal'],
-            \ 'hl+':     ['fg', 'Exception'],
-            \ 'info':    ['fg', 'Special'],
-            \ 'prompt':  ['fg', 'Function'],
-            \ 'pointer': ['fg', 'Error'],
-            \ 'marker':  ['fg', 'Error'],
-            \ 'spinner': ['fg', 'Statement'],
-            \ 'header':  ['fg', 'Number'],
-            \   }
-
-let g:fzf_layout = { 'down': '~40%'  }
+let g:fzf_layout = get(g:, 'fzf_layout', {'down': '~40%'})
 
 " Steal from fzf.vim
 " ------------------------------------------------------------------
@@ -196,13 +180,6 @@ command! -bang -nargs=* Ag
             \                         : fzf#vim#with_preview('right:80%:hidden', '?'),
             \                 <bang>0)
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:70%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -361,29 +338,50 @@ function! spacevim#plug#fzf#FindFileInProject()
 endfunction
 
 " ------------------------------------------------------------------
-" Rag utilizes ag in the root directory of project
+"  ag related
 " ------------------------------------------------------------------
-command! -nargs=* Rag
-  \ call fzf#vim#ag(<q-args>, extend({
-    \ 'dir': spacevim#util#RootDirectory(),
-    \ 'options': '--prompt="'.spacevim#util#RootDirectory().'> "'},
-    \ g:fzf_layout
-    \))
-function! spacevim#plug#fzf#SearchInProject()
-  exe ':Rag'
-endfunction
-
-" ------------------------------------------------------------------
-" Search word under cursor with ag
-" ------------------------------------------------------------------
-function! spacevim#plug#fzf#SearchCword()
-  call fzf#vim#ag(
-        \ expand('<cword>'),{
+function! s:ag(query)
+  call fzf#vim#ag(a:query,{
         \ 'dir': spacevim#util#RootDirectory(),
-        \ 'options': '--ansi --delimiter : --nth 4..,.. --prompt "?'.expand('<cword>').'> " '.
+        \ 'options': '--ansi --delimiter : --nth 4..,.. --prompt "?'.a:query.'> " '.
         \            '--color hl:68,hl+:110 --multi '.
         \            '--bind=ctrl-d:page-down,ctrl-u:page-up ',
         \ })
+endfunction
+
+" Rag utilizes ag in the root directory of project
+function! spacevim#plug#fzf#AgInProject(query)
+  call fzf#vim#ag(a:query, extend({
+      \ 'dir': spacevim#util#RootDirectory(),
+      \ 'options': '--prompt="'.spacevim#util#RootDirectory().'> "'},
+      \ g:fzf_layout))
+endfunction
+
+" Search word under cursor
+function! spacevim#plug#fzf#SearchCword()
+  call s:ag(expand('<cword>'))
+endfunction
+
+" Search visually selected
+function! spacevim#plug#fzf#Vsearch()
+  call s:ag(spacevim#util#VisualSelection())
+endfunction
+
+function! spacevim#plug#fzf#Rg(query, bang)
+  if !executable('rg')
+    return spacevim#util#warn('rg is not found')
+  endif
+  call fzf#vim#grep(
+        \ 'rg --column --line-number --no-heading --color=always --smart-case'.shellescape(a:query), 1,
+        \ a:bang ? fzf#vim#with_preview('up:60%')
+        \        : fzf#vim#with_preview('right:50%:hidden', '?'),
+        \ a:bang
+        \ )
+endfunction
+
+" Search word under cursor in current buffer
+function! spacevim#plug#fzf#SearchBcword()
+  call fzf#vim#buffer_lines(expand('<cword>'),{'options': '--prompt "?'.expand('<cword>').'> "'})
 endfunction
 
 " ------------------------------------------------------------------

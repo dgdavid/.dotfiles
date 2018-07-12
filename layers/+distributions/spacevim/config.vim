@@ -6,9 +6,12 @@ silent! color space-vim-dark
 
 augroup spacevimBasic
   autocmd!
-  autocmd BufReadPre *
+  " https://vi.stackexchange.com/questions/298/disable-syntax-highlighting-depending-on-file-size-and-type#comment291_299
+  " `syntax off` works in the `BufReadPre` context but not in the `Filetype` context;
+  " while `setlocal syntax=OFF` does not work in the `BufReadPre` context but works in the `Filetype` context.
+  autocmd FileType xml,json,text
         \ if getfsize(expand("%")) > 10000000
-        \|  syntax off
+        \|  setlocal syntax=off
         \|endif
 
   " Restore cursor position when opening file
@@ -24,6 +27,12 @@ augroup spacevimBasic
 
   " http://vim.wikia.com/wiki/Speed_up_Syntax_Highlighting
   autocmd BufEnter * :syntax sync maxlines=200
+
+  " Open quickfix window automatically when something is feeded
+  autocmd QuickFixCmdPost *
+        \ if !len(filter(range(1, winnr('$')), 'getwinvar(v:val, "&ft") == "qf"'))
+        \| copen 8
+        \|endif
 
   " Close vim if the last edit buffer is closed, i.e., close NERDTree,
   " undotree, quickfix etc automatically.
@@ -43,6 +52,9 @@ augroup spacevimBasic
     endif
     if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q! | endif
   endfunction
+
+  " http://vim.wikia.com/wiki/Always_start_on_first_line_of_git_commit_message
+  autocmd BufEnter * if &filetype == "gitcommit" | call setpos('.', [0, 1, 1, 0]) | endif
 
   " http://stackoverflow.com/questions/5933568/disable-blinking-at-the-first-last-line-of-the-file
   autocmd GUIEnter * set t_vb=

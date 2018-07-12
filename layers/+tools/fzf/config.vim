@@ -10,12 +10,29 @@ else
   " fzf.vim {
   let $LANG = 'en_US'
   " Customize fzf colors to match your color scheme
-  let g:fzf_colors = g:spacevim#plug#fzf#colors
+  " Only suitable for space-vim-dark theme, other themes are not guaranteed.
+  let g:fzf_colors = {
+              \ 'fg':      ['fg', 'StatusLineNC'],
+              \ 'bg':      ['bg', 'Normal'],
+              \ 'hl':      ['fg', 'String'],
+              \ 'fg+':     ['fg', 'Number', 'Normal'],
+              \ 'bg+':     ['bg', 'StatusLine', 'Normal'],
+              \ 'hl+':     ['fg', 'Exception'],
+              \ 'info':    ['fg', 'Special'],
+              \ 'prompt':  ['fg', 'Function'],
+              \ 'pointer': ['fg', 'Error'],
+              \ 'marker':  ['fg', 'Error'],
+              \ 'spinner': ['fg', 'Statement'],
+              \ 'header':  ['fg', 'Number'],
+              \   }
+
   nmap <Leader>? <plug>(fzf-maps-n)
   xmap <Leader>? <plug>(fzf-maps-x)
   omap <Leader>? <plug>(fzf-maps-o)
 
+  command! -nargs=* Rag call spacevim#plug#fzf#AgInProject(<q-args>)
   nnoremap <Leader>ag :Ag!<CR>
+  vnoremap <Leader>ag :<c-u>call spacevim#plug#fzf#Vsearch()<CR>
   nnoremap <Leader>bb :Buffers<CR>
 
   nnoremap <Leader>b? :Buffers<CR>
@@ -24,6 +41,8 @@ else
 
   nnoremap <Leader>ff :Files ~<CR>
   nnoremap <silent> <Leader>sf :call spacevim#plug#fzf#Session()<CR>
+
+  command! -bang -nargs=* Rg call spacevim#plug#fzf#Rg(<q-args>, <bang>0)
   nnoremap <leader>rg :Rg!<cr>
   " }
 endif
