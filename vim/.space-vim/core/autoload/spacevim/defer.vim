@@ -24,7 +24,7 @@ endfunction
 
 " 400
 function! spacevim#defer#programming(timer) abort
-  call s:lod('rainbow', 'vim-rooter', 'vim-polyglot')
+  call s:lod('rainbow', 'vim-rooter', 'vim-polyglot', 'editorconfig-vim')
 endfunction
 
 " 500
@@ -72,5 +72,5 @@ function! spacevim#defer#go(timer) abort
 endfunction
 
 function! spacevim#defer#python(timer) abort
-  call s:lod('python-mode', 'SimpylFold')
+  call s:lod('python-mode')
 endfunction
