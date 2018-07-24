@@ -40,9 +40,6 @@ endfunction
 
 " Override the default settings
 function! UserConfig()
-
-    EditorConfigReload
-
     set wrap
     set linebreak
 
