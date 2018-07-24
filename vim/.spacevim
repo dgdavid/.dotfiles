@@ -3,39 +3,21 @@ let g:spacevim_plug_home = '~/.vim/plugged'
 
 " Shipped layers in
 let g:spacevim_layers = [
-      \ 'fzf', 'ctrlp', 'unite', 'better-defaults', 'airline',
+      \ 'fzf', 'ctrlp', 'better-defaults', 'airline',
       \ 'file-manager',
       \ 'programming', 'editing', 'auto-completion', 'text-align',
       \ 'git',
-      \ 'javascript', 'ruby', 'html',
+      \ 'ruby', 'html',
       \ 'syntax-checking'
       \ ]
 
 " Private plugins
 function! UserInit()
-
-    Plug 'junegunn/seoul256.vim'
     Plug 'shime/vim-livedown'
-
-    Plug 'rakr/vim-one'
-    Plug 'jdsimcoe/abstract.vim'
-    Plug 'morhetz/gruvbox'
-    Plug 'dracula/vim'
-    Plug 'NLKNguyen/papercolor-theme'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'cocopon/iceberg.vim'
-    Plug 'rakr/vim-two-firewatch'
-    Plug 'zefei/cake16'
-    Plug 'reedes/vim-colors-pencil'
-    Plug 'mswift42/vim-themes'
-
-    Plug 'tpope/vim-rails'
-    Plug 'chrisbra/csv.vim'
-    Plug 'jelera/vim-javascript-syntax'
     Plug 'thiagoalessio/rainbow_levels.vim', { 'on': 'RainbowLevelsToggle' }
-
     Plug 'mbbill/undotree'
 
+    Plug 'morhetz/gruvbox'
 endfunction
 
 " Override the default settings
@@ -43,15 +25,13 @@ function! UserConfig()
     set wrap
     set linebreak
 
-    let g:one_allow_italics = 1 " Italics for comments
+    " Italics for comments
+    let g:one_allow_italics = 1
 
     set background=dark
-
-    colorscheme iceberg
+    colorscheme gruvbox
 
     hi Comment cterm=italic ctermfg=249
-
-    autocmd FileType python setlocal completeopt-=preview
 
     " https://github.com/liuchengxu/space-vim/issues/184#issuecomment-314318529
     set <F20>=
@@ -72,11 +52,11 @@ function! UserConfig()
     " Set text width for commit messages
     au FileType gitcommit set tw=72
 
-    " Rainbow indent
-    map <leader>l :RainbowLevelsToggle<cr>
-
     " Crlp custom configuration
     let g:ctrlp_by_filename = 0
     let g:ctrlp_working_path_mode = 'rc'
     let g:ctrlp_regexp = 0
+
+    " Rainbow indent
+    map <leader>l :RainbowLevelsToggle<cr>
 endfunction
