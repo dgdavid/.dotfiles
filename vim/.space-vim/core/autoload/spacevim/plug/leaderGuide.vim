@@ -96,6 +96,20 @@ let g:spacevim#plug#leaderGuide#lmap['j'] = {
       \ 'f' : ['call feedkeys("\<Plug>(easymotion-prefix)w")'      , 'jump-forward-wordwise']      ,
       \ 'b' : ['call feedkeys("\<Plug>(easymotion-prefix)b")'      , 'jump-backword-wordwise']     ,
       \ }
+let g:spacevim#plug#leaderGuide#lmap['l'] = {
+      \ 'name' : '+lsp'                                            ,
+      \ 'a' : ['call LanguageClient#textDocument_codeAction()'     , 'code-action']      ,
+      \ 'c' : ['call LanguageClient_contextMenu()'                 , 'context-menu']      ,
+      \ 'd' : ['call LanguageClient#textDocument_definition()'     , 'definition']       ,
+      \ 'f' : ['call LanguageClient#textDocument_formatting()'     , 'formatting']       ,
+      \ 'h' : ['call LanguageClient#textDocument_hover()'          , 'hover']            ,
+      \ 'i' : ['call LanguageClient#textDocument_implementation('  , 'implementation']   ,
+      \ 'r' : ['call LanguageClient#textDocument_references()'     , 'references']       ,
+      \ 'R' : ['call LanguageClient#textDocument_rename()'         , 'rename']           ,
+      \ 's' : ['call LanguageClient#textDocument_documentSymbol()' , 'document-symbol']  ,
+      \ 'S' : ['call LanguageClient#workspace_symbol()'            , 'workspace-symbol'] ,
+      \ 't' : ['call LanguageClient#textDocument_typeDefinition()' , 'type-definition']  ,
+      \ }
 let g:spacevim#plug#leaderGuide#lmap['p'] = {
       \ 'name' : '+projects'                                ,
       \ 'f' : ['call spacevim#plug#fzf#FindFileInProject()' , 'find-file-in-project']  ,
@@ -106,8 +120,9 @@ let g:spacevim#plug#leaderGuide#lmap['p'] = {
 let g:spacevim#plug#leaderGuide#lmap['q'] = [ 'q', 'quit' ]
 let g:spacevim#plug#leaderGuide#lmap['Q'] = [ 'qa!', 'quit-without-saving' ]
 let g:spacevim#plug#leaderGuide#lmap['s'] = {
-      \ 'name' : '+search'  ,
-      \ 'c' : ['nohlsearch' , 'search-clear-highlight']
+      \ 'name' : '+search/show'  ,
+      \ 'c' : ['nohlsearch' , 'search-clear-highlight'],
+      \ 'h' : ['call spacevim#util#SyntaxHiGroup()', 'show-highlight-group']
       \ }
 let g:spacevim#plug#leaderGuide#lmap['t'] = {
       \ 'name' : '+toggle'                               ,
