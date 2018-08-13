@@ -60,4 +60,25 @@ function! UserConfig()
 
     " Rainbow indent
     map <leader>l :RainbowLevelsToggle<cr>
+
+    " Set fzf colors
+    " See: https://github.com/junegunn/fzf/wiki/Color-schemes
+    " See:
+    " https://github.com/liuchengxu/space-vim/blob/5d290840f193fafc87482e68a59a9479ae428dcb/layers/%2Btools/fzf/config.vim#L13
+    let g:fzf_colors = {
+              \ 'fg':      ['242'],
+              \ 'bg':      ['233'],
+              \ 'hl':      ['65'],
+              \ 'fg+':     ['15', 'Normal'],
+              \ 'bg+':     ['255', 'Normal'],
+              \ 'hl+':     ['108'],
+              \ 'info':    ['108'],
+              \ 'prompt':  ['109'],
+              \ 'pointer': ['168'],
+              \ 'marker':  ['168'],
+              \ 'spinner': ['Statement'],
+              \ 'header':  ['Number'],
+    \ }
+
+    let g:fzf_layout = { 'down': '~25%'  }
 endfunction
