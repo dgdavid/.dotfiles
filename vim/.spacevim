@@ -6,8 +6,9 @@ let g:spacevim_layers = [
       \ 'fzf', 'ctrlp', 'better-defaults', 'airline',
       \ 'file-manager',
       \ 'programming', 'editing', 'auto-completion', 'text-align',
-      \ 'git',
       \ 'ruby', 'html',
+      \ 'which-key',
+      \ 'git',
       \ 'syntax-checking'
       \ ]
 
