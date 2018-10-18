@@ -16,26 +16,29 @@
 * [Features](#features)
 * [For whom?](#for-whom)
 * [Install](#install)
-  * [Prerequisites](#prerequisites)
-  * [Linux and macOS](#linux-and-macos)
-    * [one-line installer](#one-line-installer)
-    * [Makefile](#makefile)
-  * [Windows](#windows)
-  * [Manual](#manual)
+    * [Prerequisites](#prerequisites)
+    * [Linux and macOS](#linux-and-macos)
+        * [one-line installer](#one-line-installer)
+        * [Makefile](#makefile)
+    * [Windows](#windows)
+    * [Manual](#manual)
 * [Customize](#customize)
-  * [Presetting](#presetting)
-  * [`UserInit()`](#userinit)
-  * [`UserConfig()`](#userconfig)
+    * [Presetting](#presetting)
+    * [`UserInit()`](#userinit)
+    * [`UserConfig()`](#userconfig)
 * [How to use](#how-to-use)
-  * [Bootstrap](#bootstrap)
-  * [Commands](#commands)
-  * [Tips](#tips)
-    * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
-    * [Terminal Font](#terminal-font)
+    * [Bootstrap](#bootstrap)
+    * [Commands](#commands)
+    * [Tips](#tips)
+        * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
+        * [Font](#font)
+            * [GUI](#gui)
+            * [Terminal](#terminal)
 * [Update](#update)
 * [Contributions](#contributions)
 * [Acknowledgements](#acknowledgements)
 * [Articles](#articles)
+* [Contributors](#contributors)
 
 <!-- vim-markdown-toc -->
 
@@ -52,17 +55,15 @@ The distribution is completely customizable using `.spacevim`, which is equivale
 ![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-gui.png)
 (Terminal vim with [space-vim-dark](https://github.com/liuchengxu/space-vim-dark))
 
-[More screenshots](https://github.com/liuchengxu/space-vim/wiki/screenshots)
+[>> More screenshots](https://github.com/liuchengxu/space-vim/wiki/screenshots)
 
 ## Features
 
-- **Beautiful interface:** I have written a vim colorscheme [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) based on spacemacs-dark theme. You could also try [spacemacs-theme.vim](https://github.com/colepeters/spacemacs-theme.vim). 
+- **Beautiful interface:** I have written a vim colorscheme [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) based on spacemacs-dark theme. You could also try [spacemacs-theme.vim](https://github.com/colepeters/spacemacs-theme.vim).
 
-- **Mnemonic key bindings:** commands have mnemonic prefixes like <kbd>SPC b</kbd> for all the buffer commands. Lots of basic key bindings are provided by [vim-better-default](https://github.com/liuchengxu/vim-better-default).
+- **Mnemonic key bindings:** commands have mnemonic prefixes like <kbd>SPC b</kbd> for all the buffer commands, this feature is mainly powered by [vim-which-key](https://github.com/liuchengxu/vim-which-key). Furthermore, lots of basic key bindings are provided by [vim-better-default](https://github.com/liuchengxu/vim-better-default). For different language layers, `<LocalLeader>`, <kbd>,</kbd> as default in space-vim, can be seen as the major-mode prefix in spacemacs.
 
-    Meanwhile, the whole key bindings have been well adapted for vim for the lack of great plugins similar to which-key in emacs. Most key bindings are limited to no more than two keystrokes without counting `<Leader>` or `<LocalLeader>` in, e.g. <kbd>SPC x d</kbd> to delete trailing whitespaces.
-
-    For different language layers, `<LocalLeader>`, <kbd>,</kbd> as default in space-vim, can be seen as the major-mode prefix in spacemacs.
+<p align="center"><img width="800px" src="https://user-images.githubusercontent.com/8850248/46784654-8e6f9800-cd61-11e8-88df-673ff5826981.png"></p>
 
 - **Lean and mean:** no nonsense wrappers, free from being bloated.
 
@@ -86,6 +87,8 @@ Make sure you have installed:
 - **Vim** or **NeoVim**
 
 The most recent Vim(NeoVim) version is recommended, for space-vim has been specifically optimized for Vim8 and NeoVim with respect to the startup time.
+
+[chocolatey](https://chocolatey.org/) is an easy way to install software on Windows, tools like `fzf`, `rg`, `ag` are necessary to get you a full-featured space-vim.
 
 :exclamation: ~~When layers enabled at the first time, you need to run `:PlugInstall` to install relevant plugins~~.
 
@@ -138,7 +141,7 @@ Given git and Vim/NeoVim have been installed already:
     $ cp ~/.space-vim/init.spacevim ~/.spacevim
     ```
 
-5. Open vim, then space-vim will automatically install the missing plugins. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
+5. Open vim, then space-vim will automatically detect and install the missing plugins. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
 
 ## Customize
 
@@ -162,8 +165,7 @@ let g:spacevim_plug_home = '~/.vim/plugged'
 
 " Enable the existing layers in space-vim
 let g:spacevim_layers = [
-      \ 'fzf', 'unite', 'better-defaults',
-      \ 'which-key',
+      \ 'fzf', 'better-defaults', 'which-key',
       \ ]
 
 " If you want to have more control over the layer, try using Layer command.
@@ -195,7 +197,7 @@ endfunction
 function! UserConfig()
 
   " If you have installed the powerline fonts and want to enable airline layer
-  " let g:airline_powerline_fonts=1
+  " let g:airline_powerline_fonts = 1
 
   " Use gui colors in terminal if available
   function! s:enable_termgui()
@@ -258,7 +260,19 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 For more details about true colour, please see the gist [TrueColour.md](https://gist.github.com/XVilka/8346728).
 
-#### Terminal Font
+#### Font
+
+Some fantastic fonts: [programming-fonts](https://github.com/liuchengxu/space-vim/wiki/tips#programming-fonts).
+
+##### GUI
+
+For instance, install [Iosevka](https://github.com/be5invis/Iosevka) first and use it:
+
+```vim
+let &guifont = 'Iosevka:h16'
+```
+
+##### Terminal
 
 <img src="https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/iterm2_powerline_setting.png?raw=true" align="right" width="550px" alt="iterm2-font-setting" />
 
@@ -301,8 +315,9 @@ I would like to thank the many people who have helped and contributed to this pr
 - [A Vim Configuration for Spacemacs User](http://www.liuchengxu.org/posts/space-vim/)
 - [用 Vim 写 Python 的最佳实践](https://www.v2ex.com/t/337102#reply61)
 - [手工制作一个漂亮的 vim statusline ](https://segmentfault.com/a/1190000007939244)
+- [Vim 专题](https://www.jianshu.com/c/eb88e454b66a)
 
 ## Contributors
 
 This project exists thanks to all the people who contribute.
-<a href="graphs/contributors"><img src="https://opencollective.com/space-vim/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/liuchengxu/space-vim/graphs/contributors"><img src="https://opencollective.com/space-vim/contributors.svg?width=890&button=false" /></a>

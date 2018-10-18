@@ -105,7 +105,7 @@ endfunction
 function! s:ansi(str, group, default, ...)
   let fg = s:get_color('fg', a:group)
   let bg = s:get_color('bg', a:group)
-  let color = s:csi(empty(fg) ? s:ansi[a:default] : fg, 1) .
+  let color = (empty(fg) ? s:ansi[a:default] : s:csi(fg, 1)) .
         \ (empty(bg) ? '' : s:csi(bg, 0))
   return printf("\x1b[%s%sm%s\x1b[m", color, a:0 ? ';1' : '', a:str)
 endfunction
@@ -174,17 +174,6 @@ function! s:align_lists(lists)
   return a:lists
 endfunction
 
-command! -bang -nargs=* Ag
-            \ call fzf#vim#ag(<q-args>,
-            \                 <bang>0 ? fzf#vim#with_preview('up:80%')
-            \                         : fzf#vim#with_preview('right:80%:hidden', '?'),
-            \                 <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-" }
-
 function! spacevim#plug#fzf#Session()
   call fzf#run({
   \ 'source':  'ls -1 ~/.vim/session',
@@ -193,7 +182,6 @@ function! spacevim#plug#fzf#Session()
   \ 'down':    '40%'
   \})
 endfunction
-
 
 " ------------------------------------------------------------------
 " Configuration Files
