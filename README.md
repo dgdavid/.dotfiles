@@ -9,17 +9,20 @@ My custom collection of dotfiles. Second attempt :sweat_smile:, now managed via
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [How to use](#how-to-use)
-- [How to keep updated](#how-to-keep-updated)
-- [Configurations](#configurations)
-  - [tmux](#tmux)
-    - [Enabling italics](#enabling-italics)
-      - [Inside gnome-terminal](#inside-gnome-terminal)
-  - [vim](#vim)
-    - [Additional plugins](#additional-plugins)
-    - [Custom configuration](#custom-configuration)
-  - [Zsh](#zsh)
-    - [Plugins](#plugins)
+- [dotfiles](#dotfiles)
+  - [How to use](#how-to-use)
+  - [How to keep updated](#how-to-keep-updated)
+  - [Configurations](#configurations)
+    - [tmux](#tmux)
+      - [Enabling italics](#enabling-italics)
+        - [Inside gnome-terminal](#inside-gnome-terminal)
+    - [vim](#vim)
+      - [Additional plugins](#additional-plugins)
+      - [Custom configuration](#custom-configuration)
+    - [Zsh](#zsh)
+      - [Plugins](#plugins)
+    - [irb](#irb)
+    - [git](#git)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -133,3 +136,10 @@ Zsh plugins](https://github.com/unixorn/awesome-zsh-plugins#frameworks) and
 
 This custom configuration file was added due to a problem in macOS related to
 reverse search and history in both `irb` and `Rails console`.
+
+### git
+
+Basic git configuration and [aliases from GitAlias/gitalias](https://github.com/GitAlias/gitalias)
+
+User configuration should be placed in `~/.gitconfig_user` file. See
+[git/.gitconfig](git/.gitconfig) for more details.
