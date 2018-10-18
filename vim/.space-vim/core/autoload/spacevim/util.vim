@@ -25,22 +25,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "    Utilities
 """""""""""""""""""""""""""""""""""""""""""""""""""
-function! spacevim#util#ToggleCursorColumn()
-  if &cursorcolumn
-    setlocal nocursorcolumn
-  else
-    setlocal cursorcolumn
-  endif
-endfunction
-
-function! spacevim#util#ToggleColorColumn()
-  if &colorcolumn
-    setlocal colorcolumn=
-  else
-    setlocal colorcolumn=80
-  endif
-endfunction
-
 function! spacevim#util#Runtimepath()
   for path in split(&runtimepath, ',')
     echo path
@@ -92,17 +76,6 @@ function! spacevim#util#OpenPluginHomepage() abort
   silent exec "!$BROWSER https://github.com/".repository
 endfunction
 
-let s:hidden_all = 0
-function! spacevim#util#ToggleHiddleAll()
-  if s:hidden_all == 0
-    let s:hidden_all = 1
-    setlocal noshowmode noruler noshowcmd laststatus=0 cmdheight=1
-  else
-    let s:hidden_all = 0
-    setlocal showmode ruler showcmd laststatus=2 cmdheight=1
-  endif
-endfunction
-
 function! spacevim#util#RootDirectory()
   if exists('*FindRootDirectory')
     let root_dir = FindRootDirectory()
@@ -128,4 +101,18 @@ function! spacevim#util#VisualSelection()
     let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
+endfunction
+
+" Get all lines in the buffer as a a list. Snippet from vim-go
+function! spacevim#util#GetLines()
+  let buf = getline(1, '$')
+  if &encoding != 'utf-8'
+    let buf = map(buf, 'iconv(v:val, &encoding, "utf-8")')
+  endif
+  if &l:fileformat == 'dos'
+    " XXX: line2byte() depend on 'fileformat' option.
+    " so if fileformat is 'dos', 'buf' must include '\r'.
+    let buf = map(buf, 'v:val."\r"')
+  endif
+  return buf
 endfunction
