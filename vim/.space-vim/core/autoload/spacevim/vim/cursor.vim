@@ -13,7 +13,17 @@ function! spacevim#vim#cursor#TruncatedEcho(msg) abort
 
       " The message is truncated and saved to the history.
       setlocal shortmess+=T
-      exec "norm! :echomsg l:msg\n"
+      try
+          exec "norm! :echomsg l:msg\n"
+      catch /^Vim\%((\a\+)\)\=:E523/
+          " Fallback into manual truncate (ale #1987)
+          let l:winwidth = winwidth(0)
+          if l:winwidth < strdisplaywidth(l:msg)
+              " Truncate msg longer than window width with trailing '...'
+              let l:msg = l:msg[:l:winwidth - 4] . '...'
+          endif
+          exec 'echomsg l:msg'
+      endtry
 
       " Reset the cursor position if we moved off the end of the line.
       " Using :norm and :echomsg can move the cursor off the end of the
