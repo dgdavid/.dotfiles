@@ -17,6 +17,7 @@ function! UserInit()
     Plug 'shime/vim-livedown'
     Plug 'thiagoalessio/rainbow_levels.vim', { 'on': 'RainbowLevelsToggle' }
     Plug 'mbbill/undotree'
+    Plug 'chrisbra/NrrwRgn'
 
     Plug 'morhetz/gruvbox'
 endfunction
