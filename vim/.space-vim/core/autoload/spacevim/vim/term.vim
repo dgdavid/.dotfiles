@@ -14,12 +14,16 @@ function! spacevim#vim#term#Open(opts) abort
     let index = 0
     while index < len(s:closed)
       let item = s:closed[index]
-      let bufnr = s:jobs[item]
-      if bufloaded(bufnr)
-        silent execute bufnr . 'bwipeout!'
-        unlet s:jobs[item]
-        unlet s:closed[index]
+
+      if has_key(s:jobs, item)
+        let bufnr = s:jobs[item]
+        if bufloaded(bufnr)
+          silent execute bufnr . 'bwipeout!'
+          unlet s:jobs[item]
+        endif
       endif
+
+      unlet s:closed[index]
     endwhile
   else
     for termbuf in s:termbufs
@@ -33,8 +37,23 @@ function! spacevim#vim#term#Open(opts) abort
 
   execute winrestcmd
 
-  execute 'vertical belowright' 'new' '+setl' 'buftype=nofile'
-  setlocal buftype=nofile winfixheight norelativenumber nonumber bufhidden=wipe
+  execute 'vertical belowright new'
+  setlocal
+    \ nonumber
+    \ norelativenumber
+    \ nolist
+    \ nowrap
+    \ nopaste
+    \ nomodeline
+    \ noswapfile
+    \ nocursorline
+    \ nocursorcolumn
+    \ winfixwidth
+    \ winfixheight
+    \ colorcolumn=
+    \ nobuflisted
+    \ buftype=nofile
+    \ bufhidden=unload
   setlocal listchars+=trail:\ 
 
   let cmd = get(a:opts, 'cmd', '')
