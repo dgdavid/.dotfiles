@@ -3,6 +3,8 @@ CHANGELOG
 
 ## [unreleased]
 
+## [0.9.0] - 2018.12.28
+
 ### Added
 
 - a smooth prompt for missing plugins.
@@ -13,6 +15,7 @@ CHANGELOG
 - introduce `on_event` to simplify lazy loading based on events.(#351)
 - `haskell` layer
 - `g:spacevim_lsp_prefer_coc`, add [coc.nvim](https://github.com/neoclide/coc.nvim) support for lsp layer.
+- `spacevim#vim#term#Run()` could be used for running programms asynchronously.
 
 ### Changed
 
@@ -21,6 +24,7 @@ CHANGELOG
 - optimize `core/autoload/spacevim.vim`.(#336)
 - load `editorconfig-vim` via timer instead of on-demand loading.
 - replace `vim-leaderGuide` with `vim-which-key`.
+- replace `wannesm/wmgraphviz.vim` with `liuchengxu/graphviz.vim`.
 
 ### Removed
 
