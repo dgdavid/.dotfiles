@@ -3,30 +3,26 @@
 My custom collection of dotfiles. Second attempt :sweat_smile:, now managed via
 [GNU Stow](https://www.gnu.org/software/stow/).
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [dotfiles](#dotfiles)
-  - [How to use](#how-to-use)
-  - [How to keep updated](#how-to-keep-updated)
-  - [Configurations](#configurations)
-    - [tmux](#tmux)
-      - [Enabling italics](#enabling-italics)
-        - [Inside gnome-terminal](#inside-gnome-terminal)
-    - [vim](#vim)
-      - [Additional plugins](#additional-plugins)
-      - [Custom configuration](#custom-configuration)
-    - [Zsh](#zsh)
-      - [Plugins](#plugins)
-    - [irb](#irb)
-    - [git](#git)
+- [How to use](#how-to-use)
+- [How to keep updated](#how-to-keep-updated)
+- [Configurations](#configurations)
+  - [tmux](#tmux)
+    - [Enabling italics](#enabling-italics)
+      - [Inside gnome-terminal](#inside-gnome-terminal)
+  - [vim](#vim)
+    - [Additional plugins](#additional-plugins)
+    - [Custom configuration](#custom-configuration)
+  - [Zsh](#zsh)
+    - [Plugins](#plugins)
+  - [irb](#irb)
+  - [git](#git)
+  - [kitty](#kitty)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
 
 ## How to use
 
