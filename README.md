@@ -112,7 +112,9 @@ while.
 
 But now, after took a look to a handful of Zsh frameworks (see [Awesome
 Zsh plugins](https://github.com/unixorn/awesome-zsh-plugins#frameworks) and
-[Terminals are sexy](https://terminalsare.sexy/#shells)), I am using [zplug](https://github.com/zplug/zplug).
+[Terminals are sexy](https://terminalsare.sexy/#shells)), I am using ~~[zplug](https://github.com/zplug/zplug)~~ zim:fw.
+
+I'm also using a _.zshr.after_ configuration file to put additional configuration.
 
 #### Plugins
 

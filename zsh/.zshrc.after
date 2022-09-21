@@ -1,0 +1,22 @@
+# Tool that helps to checkout all YaST modules
+export PATH=$PATH:$HOME/development/yast-meta/
+
+export PATH=$PATH:$HOME/.gem/ruby/3.1.0/bin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
+
+alias vim=nvim
+export EDITOR=vim
+export VAGRANT_EXPERIMENTAL="disks"
+export N_PREFIX=/home/dei/node_versions
+export PATH=$PATH:$N_PREFIX/bin
+alias dyast='docker run --rm -it -v `pwd`:/usr/src/app yast2'
+alias dyastl='docker run --rm -it -v `pwd`:/usr/src/app -e Y2DEBUG=1 -e Y2SLOG_FILE=./y2log yast2'
+alias ssh='TERM=screen ssh'
+alias iosc="osc -A https://api.suse.de"
+
+alias git-switch-all-master='for i in */.git; do ( echo $i; cd $i/..; git switch master ); done'
+alias git-pull-all='for i in */.git; do ( echo $i; cd $i/..; git pull ); done'
+
+[ -f ~/.tmuxinator.zsh ] && source ~/.tmuxinator.zsh
