@@ -120,10 +120,15 @@ Zsh plugins](https://github.com/unixorn/awesome-zsh-plugins#frameworks) and
 
 #### Plugins
 
-* [zplug](https://github.com/zplug/zplug) - A next-generation plugin manager
-  for Zsh.
-* [Pure](https://github.com/sindresorhus/pure) - Pretty, minimal and fast Zsh
-  prompt.
+* ~~[zplug](https://github.com/zplug/zplug) - A next-generation plugin manager
+  for Zsh.~~
+* ~~[Pure](https://github.com/sindresorhus/pure) - Pretty, minimal and fast Zsh
+  prompt.~~
+* [zim:fw](https://github.com/zimfw/zimfw) - a Zsh configuration framework that
+  bundles a plugin manager, useful modules, and a wide variety of themes,
+  without compromising on speed.
+* [Starship](https://starship.rs/) - The minimal, blazing-fast, and infinitely
+  customizable prompt for any shell!
 * [Zsh syntax
   highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) - Fish
   shell like syntax highlighting for Zsh.
