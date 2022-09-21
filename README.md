@@ -148,3 +148,8 @@ Basic git configuration and [aliases from GitAlias/gitalias](https://github.com/
 
 User configuration should be placed in `~/.gitconfig_user` file. See
 [git/.gitconfig](git/.gitconfig) for more details.
+
+### kitty
+
+Tweaked configuration for [kitty](https://sw.kovidgoyal.net/kitty/), _the fast,
+feature-rich, GPU based terminal emulator_.
